@@ -79,25 +79,30 @@ const uint64_t mainnet_hard_fork_version_1_till = 1009826;
 
 const hardfork_t testnet_hard_forks[] = {
   // version 1 from the start of the blockchain
-  { 1, 1, 0, 1717027200 },
-  { 2, 5, 0, 1717027500 },
-  { 3, 10, 0, 1717028100 },
-  { 4, 15, 0, 1717028700 },
-  { 5, 20, 0, 1717029300 },
-  { 6, 25, 0, 1717029900 },
-  { 7, 30, 0, 1717030500 },
-  { 8, 35, 0, 1717031100 },
-  { 9, 40, 0, 1717031700 },
-  { 10, 45, 0, 1717032300 },
-  { 11, 50, 0, 1717032900 },
-  { 12, 55, 0, 1717033500 },
-  { 13, 60, 0, 1717034100 },
-  { 14, 65, 0, 1717034700 },
-  { 15, 70, 0, 1717035300 },
-  { 16, 75, 0, 1717035900 },
+  { 1, 1, 0, 1341378000 },
+
+  // version 2 starts from block 624634, which is on or around the 23rd of November, 2015. Fork time finalised on 2015-11-20. No fork voting occurs for the v2 fork.
+  { 2, 624634, 0, 1445355000 },
+
+  // versions 3-5 were passed in rapid succession from September 18th, 2016
+  { 3, 800500, 0, 1472415034 },
+  { 4, 801219, 0, 1472415035 },
+  { 5, 802660, 0, 1472415036 + 86400*180 }, // add 5 months on testnet to shut the update warning up since there's a large gap to v6
+
+  { 6, 971400, 0, 1501709789 },
+  { 7, 1057027, 0, 1512211236 },
+  { 8, 1057058, 0, 1533211200 },
+  { 9, 1057778, 0, 1533297600 },
+  { 10, 1154318, 0, 1550153694 },
+  { 11, 1155038, 0, 1550225678 },
+  { 12, 1308737, 0, 1569582000 },
+  { 13, 1543939, 0, 1599069376 },
+  { 14, 1544659, 0, 1599069377 },
+  { 15, 1982800, 0, 1652727000 },
+  { 16, 1983520, 0, 1652813400 },
 };
 const size_t num_testnet_hard_forks = sizeof(testnet_hard_forks) / sizeof(testnet_hard_forks[0]);
-const uint64_t testnet_hard_fork_version_1_till = 5;
+const uint64_t testnet_hard_fork_version_1_till = 624633;
 
 const hardfork_t stagenet_hard_forks[] = {
   // version 1 from the start of the blockchain
