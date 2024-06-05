@@ -35,7 +35,7 @@ alternatives:
   package: "x86_64-w64-mingw32-gcc"
   path: "/usr/bin/x86_64-w64-mingw32-gcc-posix"
 remotes:
-- "url": "https://github.com/monero-project/monero.git"
+- "url": "https://github.com/spackle-xmr/monero.git"
   "dir": "monero"
 files: []
 script: |

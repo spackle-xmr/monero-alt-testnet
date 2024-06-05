@@ -26,7 +26,7 @@ packages:
 - "cmake"
 - "unzip"
 remotes:
-- "url": "https://github.com/monero-project/monero.git"
+- "url": "https://github.com/spackle-xmr/monero.git"
   "dir": "monero"
 files: []
 script: |
