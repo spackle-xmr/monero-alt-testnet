@@ -707,9 +707,11 @@ namespace nodetool
       //full_addrs.insert("37.187.74.171:28080");
       //full_addrs.insert("77.172.183.193:28080");
       full_addrs.insert("95.217.143.178:28080");
-      full_addrs.insert("136.34.217.125:28080");
       full_addrs.insert("45.135.180.21:28080");
       full_addrs.insert("45.135.180.74:28080");
+      full_addrs.insert("185.130.45.183:28080");
+      full_addrs.insert("95.217.143.100:28080");
+      full_addrs.insert("23.145.40.115:28080");
     }
     else if (m_nettype == cryptonote::STAGENET)
     {
