@@ -14,7 +14,7 @@ Go to https://github.com/spackle-xmr/monero/releases/latest and download and unp
 
 - For macOS: `monero-x86_64-apple-darwin-v250.x.x.x.tar.bz2`
 
-You can also compile the code from source using the `master` branch.
+You can also [compile the code from source](https://github.com/moneroexamples/monero-compilation/blob/master/README.md#example-compilation-of-master-branch-ie-development-version-of-monero-on-ubuntu-2204) using the `master` branch.
 
 In your terminal, navigate inside the unpacked directory so you can see `monerod`.
 
