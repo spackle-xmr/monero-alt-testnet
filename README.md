@@ -1,3 +1,61 @@
+# Monero stressnet
+
+## ❗❗❗ WARNING: stressnet anonymity set
+
+The anonymity set of running a node on the mainnet Monero network is in the thousands. The anonymity set of running a node on this stressnet will be in the dozens at best. If you run a stressnet node on your machine, the IP address of your machine (or the proxy's IP address if your machine uses a proxy) will be visible to other nodes on the network. If you have an extreme threat model, this may be an unacceptable risk for you.
+
+## How to startup a node on stressnet
+
+Go to https://github.com/spackle-xmr/monero/releases/latest and download and unpack the node software for your operating system:
+
+- For Linux: `monero-x86_64-linux-gnu-v250.18.x.x.x.tar.bz2`
+
+- For Windows: `monero-x86_64-w64-mingw32-v250.x.x.x.zip`
+
+- For macOS: `monero-x86_64-apple-darwin-v250.x.x.x.tar.bz2`
+
+You can also [compile the code from source](https://github.com/moneroexamples/monero-compilation/blob/master/README.md#example-compilation-of-master-branch-ie-development-version-of-monero-on-ubuntu-2204) using the `master` branch.
+
+In your terminal, navigate inside the unpacked directory so you can see `monerod`.
+
+We will add a few flags to normal startup:
+
+### `--testnet`
+
+The stressnet is a hard fork of Monero's main testnet. stressnet was forked from testnet at block height 2508830 to have a large blockchain database from the beginning that could reveal bottlenecks in database processing.
+
+### `--max-connections-per-ip=10`
+
+Some of the stressnet nodes are running from the same IP address. This flag allows your node to connect to multiple nodes from the same IP address.
+
+```bash
+--add-priority-node=95.217.143.178:28080 --add-priority-node=45.135.180.21:28080 --add-priority-node=45.135.180.74:28080 --add-priority-node=185.130.45.183:28080 --add-priority-node=95.217.143.100:28080 --add-priority-node=23.145.40.115:28080
+```
+
+These nodes are already in `monerod`'s code as initial seed nodes for the stressnet, but adding them as priority nodes will make your node try to maintain a connection with them throughout the syncing process.
+
+**If you _do not_ already have a testnet node running on your machine, the full terminal command should be:**
+
+```bash
+./monerod --testnet --max-connections-per-ip=10 --add-priority-node=95.217.143.178:28080 --add-priority-node=45.135.180.21:28080 --add-priority-node=45.135.180.74:28080 --add-priority-node=185.130.45.183:28080 --add-priority-node=95.217.143.100:28080 --add-priority-node=23.145.40.115:28080
+```
+
+If you are on Windows, use `monerod.exe` instead of `monerod`.
+
+The first line of the terminal output should say that you are on the stressnet version of `monerod`, which starts with `250`, like `Monero 'Fluorine Fermi' (v250.18.3.3.1-release)`. If it starts with a zero like `v0.18.3.3`, you've started the normal installed `monerod` on your system and you will not be connected to the stressnet. Make sure to include the `./` at the start of the command if you are on Linux.
+
+**If you _do_ run a testnet node already on the machine:**
+
+You will need to store the blockchain in another place to avoid clashes with your current testnet database location. You will need to use different ports for p2p and rpc because your testnet node is already using the default ports. Turn off zmq because it's unnecessary and uses a port. Add these flags:
+
+`--p2p-bind-port=<PORT> --rpc-bind-port=<ANOTHER_PORT> --no-zmq --data-dir=<DIR>`
+
+## Opening the p2p port
+
+If you open the node's p2p port (`28080` by default) on your firewall and network, other nodes can make incoming connections to your nodes. This is helpful, but not necessary to participate in stressnet.
+
+## Original Monero README:
+
 # Monero
 
 Copyright (c) 2014-2023, The Monero Project
