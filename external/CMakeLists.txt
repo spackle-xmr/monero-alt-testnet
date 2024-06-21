@@ -35,10 +35,6 @@
 # ...except for FreeBSD, because FreeBSD is a special case that doesn't play well with
 # others.
 
-if(NOT MSVC)              
-  add_compile_options(-D_GNU_SOURCE)
-endif()
-
 find_package(Miniupnpc REQUIRED)
 
 message(STATUS "Using in-tree miniupnpc")

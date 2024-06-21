@@ -39,9 +39,6 @@
 #include <queue>
 #include <boost/serialization/version.hpp>
 #include <boost/utility.hpp>
-#include <boost/bimap.hpp>
-#include <boost/bimap/set_of.hpp>
-#include <boost/bimap/multiset_of.hpp>
 
 #include "span.h"
 #include "string_tools.h"
@@ -81,35 +78,8 @@ namespace cryptonote
     }
   };
 
-  class firstCompare
-  {
-  public:
-    bool operator()(const std::pair<double, std::time_t>& a, const std::pair<double, std::time_t>& b) const
-    {
-      // sort by greatest first, not least
-      if (a.first > b.first) return true;
-      if (a.first < b.first) return false;
-
-      if (a.second < b.second) return true;
-      return false;
-    }
-  }; 
-
-  class secondCompare
-  {
-  public:
-    bool operator()(const crypto::hash& a, const crypto::hash& b) const
-    {
-      return memcmp(a.data, b.data, sizeof(crypto::hash)) < 0;
-    }
-  };
-
   //! container for sorting transactions by fee per unit size
-  // typedef std::set<tx_by_fee_and_receive_time_entry, txCompare> sorted_tx_container;
-//  typedef boost::bimap<tx_by_fee_and_receive_time_entry, txCompare> sorted_tx_container;
-  typedef boost::bimap<boost::bimaps::multiset_of<std::pair<double, std::time_t>, firstCompare>,
-                       boost::bimaps::set_of<crypto::hash, secondCompare>> sorted_tx_container;
-  
+  typedef std::set<tx_by_fee_and_receive_time_entry, txCompare> sorted_tx_container;
 
   /**
    * @brief Transaction pool, handles transactions which are not part of a block
@@ -683,7 +653,7 @@ private:
      *
      * @return an iterator, possibly to the end of the container if not found
      */
-    cryptonote::sorted_tx_container::iterator find_tx_in_sorted_container(const crypto::hash& id);
+    sorted_tx_container::iterator find_tx_in_sorted_container(const crypto::hash& id) const;
 
     //! cache/call Blockchain::check_tx_inputs results
     bool check_tx_inputs(const std::function<cryptonote::transaction&(void)> &get_tx, const crypto::hash &txid, uint64_t &max_used_block_height, crypto::hash &max_used_block_id, tx_verification_context &tvc, bool kept_by_block = false) const;
