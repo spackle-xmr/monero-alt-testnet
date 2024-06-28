@@ -45,10 +45,11 @@ void on_levin_traffic(const context_t &context, bool initiator, bool sent, bool 
 
 namespace
 {
+  // Higher limits for stressnet, as a "band aid solution" against bumping against limits e.g. with very big blocks
   static const constexpr epee::serialization::portable_storage::limits_t default_levin_limits = {
-    8192, // objects
-    16384, // fields
-    16384, // strings
+    20000, /* was 8192 */  // objects
+    50000, /* was 16384 */ // fields
+    50000, /* was 16384 */ // strings
   };
 }
 
